@@ -1,2 +1,7 @@
 .env
 node_modules/
+.ipynb_checkpoints
+*.ipynb
+*.iml
+.idea
+bin/
