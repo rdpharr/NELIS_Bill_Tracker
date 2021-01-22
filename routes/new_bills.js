@@ -14,7 +14,6 @@ router.get('/', function (req, res, next) {
     let con = mysql.createConnection(config);
     con.query('select * from bills ORDER BY introduced DESC',(error, results) => {
         if (error) {
-            console.log(d);
             console.log({ error: error });
         }
         res.render('new_bills', {
