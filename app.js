@@ -3,10 +3,10 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const cron = require('node-cron');
 
 var indexRouter = require('./routes/index');
 var newBillsRouter = require('./routes/new_bills');
+var billScraperRouter = require('./routes/bill_scraper')
 
 var app = express();
 
@@ -23,13 +23,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/new_bills', newBillsRouter);
+app.use('/scrape', billScraperRouter);
 
-// Schedule tasks to be run on the server.
-const scraper = require('./bill_scraper');
-// run every 2 hours
-cron.schedule('0 0 */2 * * *', function() {
-  scraper.scrape_bills();
-});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

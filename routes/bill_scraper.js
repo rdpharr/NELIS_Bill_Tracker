@@ -1,3 +1,6 @@
+const express = require('express');
+const router = express.Router();
+
 const axios = require('axios');
 const { ConcurrencyManager } = require("axios-concurrency");
 const cheerio = require('cheerio');
@@ -5,7 +8,11 @@ const mysql = require('mysql2');
 const moment = require('moment');
 require('dotenv').config();
 
-function scrape_bills(){
+router.get('/', function (req, res, next) {
+    scrape_bills(req,res,next);
+});
+
+function scrape_bills(req,res,next){
     console.log('starting scraper...')
     // concurrency setup
     let api = axios.create({baseURL: "https://www.leg.state.nv.us/App/NELIS/REL/81st2021/Bill"});
@@ -23,6 +30,7 @@ function scrape_bills(){
                     let data = parse_bill_pages(responses, bills);
                     db_push(data);
                     console.log("updated "+data.length+" bills in database...");
+                    res.send('Done!');
                 });
             manager.detach()
         })
@@ -123,4 +131,4 @@ function parse_bill_pages(responses, bills){
     return data;
 }
 
-exports.scrape_bills = scrape_bills;
+module.exports = router;
