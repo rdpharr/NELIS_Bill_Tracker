@@ -6,6 +6,7 @@ const logger = require('morgan');
 const cron = require('node-cron');
 
 var indexRouter = require('./routes/index');
+var newBillsRouter = require('./routes/new_bills');
 
 var app = express();
 
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/new_bills', newBillsRouter);
 
 // Schedule tasks to be run on the server.
 const scraper = require('./bill_scraper');
