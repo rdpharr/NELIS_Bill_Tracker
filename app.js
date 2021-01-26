@@ -14,6 +14,8 @@ var app = express();
 var hbs = require('hbs');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+hbs.registerHelper('dateFormat', require('handlebars-dateformat'));
+
 
 app.use(logger('dev'));
 app.use(express.json());
