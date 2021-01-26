@@ -44,9 +44,12 @@ function db_push(data){
         host: process.env.MYSQL_SERVER,
         user: process.env.MYSQL_USER,
         password: process.env.MYSQL_PASSWORD,
-        database: "bills"
+        database: "bills",
+        waitForConnections: true,
+        connectionLimit: 10,
+        queueLimit: 0
     }
-    let con = mysql.createConnection(config);
+    let con = mysql.createPool(config);
 
     let sql='INSERT INTO bills (bill_id, bill, url, summary, introduced, fiscal_notes, primary_sponsor, title, ';
     sql += 'digest, most_recent_action, upcoming_hearings, past_hearings, final_passage_votes, conference_committees,';
