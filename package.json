@@ -17,6 +17,7 @@
     "handlebars-dateformat": "^1.1.1",
     "hbs": "^4.1.1",
     "http-errors": "~1.6.3",
+    "lunr": "^2.3.9",
     "moment": "^2.29.1",
     "morgan": "~1.9.1",
     "mysql2": "^2.2.5",

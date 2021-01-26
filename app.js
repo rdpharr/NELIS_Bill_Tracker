@@ -6,7 +6,8 @@ const logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var newBillsRouter = require('./routes/new_bills');
-var billScraperRouter = require('./routes/bill_scraper')
+var billScraperRouter = require('./routes/bill_scraper');
+var searchRouter = require('./routes/search');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/new_bills', newBillsRouter);
 app.use('/scrape', billScraperRouter);
+app.use('/search', searchRouter);
 
 
 
