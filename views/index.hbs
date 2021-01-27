@@ -1,53 +1,113 @@
-
-<div class="card border-dark">
-    <div class="card-block">
-        <div class="card-header">
-            <h4>{{title}}</h4>
+<div class='row'>
+    <div class="card border-dark col-md-8">
+        <div class="card-block">
+            <div class="card-header">
+                <h4>{{title}}</h4>
+            </div>
+            <div class="card-body text-dark">
+                <p class="card-text">Welcome to the Mass Liberation Project's Nevada Bill Tracker. We pull data every hour from the NELIS database. This page lets you:</p>
+                <ul>
+                    <li>Search for bills that you might want to track. Use the search box in the upper right corner. Try searching for <b>"criminal"</b>, <b>"juvenile"</b>, <b>"penalty"</b> or <b>"firearm"</b>. You can also search by BDR number. </li>
+                    <li>See the bills you track on the home page, with data about their next hearing date. Go to <a href="bills">all bills</a> to start tracking some bills. They will show up in the table below.</li>
+                </ul>
+            </div>
         </div>
-        <div class="card-body text-dark">
-            <p class="card-text">Welcome to the Mass Liberation Project's Nevada Bill Tracker. We pull data every hour from the NELIS database. This page lets you:</p>
-            <ul>
-                <li>Search for bills that you might want to track. Use the search box in the upper right corner. Try searching for <b>"criminal"</b>, <b>"juvenile"</b>, <b>"penalty"</b> or <b>"firearm"</b>.</li>
-                <li>See the bills you track on the home page, with data about their next hearing date. Go to <a href="bills">all bills</a> to start tracking some bills. They will show up in the table below.</li>
-            </ul>
+    </div>
+    <div class="col-md-4">
+        <div class="card-block">
+            <div class="card-header">
+                <h4>Links</h4>
+            </div>
+            <div class="card-body text-dark">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a href="https://www.facebook.com/massliberationprojectnv/">Mass Liberation of NV</a></li>
+                    <li class="list-group-item"><a href="https://www.leg.state.nv.us/App/NELIS/REL/81st2021">NELIS</a></li>
+                    <li class="list-group-item"><a href="https://www.leg.state.nv.us/App/Opinions/81st2021/">Comment on a Bill</a></li>
+                </ul>
+
+            </div>
         </div>
     </div>
 </div>
+
 <br/>
-<div class="card border-dark">
-    <div class="card-block">
-        <div class="card-header">
-            <h4>My Bills</h4>
-        </div>
-        <div class="card-body text-dark">
-            <table id="resultsTable" class="table table-striped table-bordered display responsive" style="width:100%">
-                <thead>
-                <tr>
-                    <th>Bill</th>
-                    <th>Summary</th>
-                    <th>Introduced</th>
-                    <th>Most Recent Action</th>
-                    <th>Hearings</th>
-                    <th>Bill Tracking</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each my_bills}}
+<div class='row'>
+    <div class="card border-dark">
+        <div class="card-block">
+            <div class="card-header">
+                <h4>My Bills</h4>
+            </div>
+            <div class="card-body text-dark">
+                <table id="myBillsTable" class="table table-striped table-bordered display responsive" style="width:100%">
+                    <thead>
                     <tr>
-                        <td><a href="https://www.leg.state.nv.us{{this.url}}">{{this.bill}}</a></td>
-                        <td>{{this.summary}}</td>
-                        <td>{{dateFormat this.introduced "YYYY-MM-DD"}}</td>
-                        <td>{{this.most_recent_action}}</td>
-                        <td>{{this.upcoming_hearings}}</td>
-                        {{#if this.tracked}}
-                            <td><button id="btn_{{this.bill}}" class="btn btn-outline-danger btn-sm" type="button" onclick='document.cookie="{{this.bill}}=true;Max-Age=-99999999;";window.location.reload();'>Untrack</button></td>
-                        {{else}}
-                            <td><button id="btn_{{this.bill}}" class="btn btn-outline-primary btn-sm" type="button" onclick='document.cookie="{{this.bill}}=true;expires=1 Jul 2021 12:00:00 GMT;";window.location.reload();'>Track</button></td>
-                        {{/if}}
+                        <th>Bill</th>
+                        <th>Summary</th>
+                        <th>Introduced</th>
+                        <th>Most Recent Action</th>
+                        <th>Hearings</th>
+                        <th>Bill Tracking</th>
                     </tr>
-                {{/each}}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {{#each my_bills}}
+                        <tr>
+                            <td><a href="https://www.leg.state.nv.us{{this.url}}">{{this.bill}}</a></td>
+                            <td>{{this.summary}}</td>
+                            <td>{{dateFormat this.introduced "YYYY-MM-DD"}}</td>
+                            <td>{{this.most_recent_action}}</td>
+                            <td>{{this.upcoming_hearings}}</td>
+                            {{#if this.tracked}}
+                                <td><button id="btn_{{this.bill}}" class="btn btn-outline-danger btn-sm" type="button" onclick='document.cookie="{{this.bill}}=true;Max-Age=-99999999;";window.location.reload();'>Untrack</button></td>
+                            {{else}}
+                                <td><button id="btn_{{this.bill}}" class="btn btn-outline-primary btn-sm" type="button" onclick='document.cookie="{{this.bill}}=true;expires=1 Jul 2021 12:00:00 GMT;";window.location.reload();'>Track</button></td>
+                            {{/if}}
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br/>
+<div class='row'>
+    <div class="card border-dark">
+        <div class="card-block">
+            <div class="card-header">
+                <h4>New Bills (Last 2 days)</h4>
+            </div>
+            <div class="card-body text-dark">
+                <table id="newBillsTable" class="table table-striped table-bordered display responsive" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Bill</th>
+                        <th>Summary</th>
+                        <th>Introduced</th>
+                        <th>Most Recent Action</th>
+                        <th>Hearings</th>
+                        <th>Bill Tracking</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each new_bills}}
+                        <tr>
+                            <td><a href="https://www.leg.state.nv.us{{this.url}}">{{this.bill}}</a></td>
+                            <td>{{this.summary}}</td>
+                            <td>{{dateFormat this.introduced "YYYY-MM-DD"}}</td>
+                            <td>{{this.most_recent_action}}</td>
+                            <td>{{this.upcoming_hearings}}</td>
+                            {{#if this.tracked}}
+                                <td><button id="btn_{{this.bill}}" class="btn btn-outline-danger btn-sm" type="button" onclick='document.cookie="{{this.bill}}=true;Max-Age=-99999999;";window.location.reload();'>Untrack</button></td>
+                            {{else}}
+                                <td><button id="btn_{{this.bill}}" class="btn btn-outline-primary btn-sm" type="button" onclick='document.cookie="{{this.bill}}=true;expires=1 Jul 2021 12:00:00 GMT;";window.location.reload();'>Track</button></td>
+                            {{/if}}
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -55,8 +115,12 @@
 
 <script>
     $(document).ready(function () {
+        ready_table('#myBillsTable');
+        ready_table('#newBillsTable');
+    });
+    function ready_table(table_name){
         $.fn.dataTable.ext.errMode = 'none';
-        let table = $('#resultsTable').DataTable({
+        let table = $(table_name).DataTable({
             fixedHeader: true,
             autoWidth: true,
             dom: 'Bltip',
@@ -66,8 +130,8 @@
                 'pdfHtml5'
             ],
         });
-        $('#resultsTable thead tr').clone(true).appendTo('#resultsTable thead');
-        $('#resultsTable thead tr:eq(1) th').each(function (i) {
+        $(table_name +' thead tr').clone(true).appendTo(table_name +' thead');
+        $(table_name +' thead tr:eq(1) th').each(function (i) {
             var title = $(this).text();
             $(this).html('<input type="text" placeholder="Search ' + title + '" style="width:90%" />');
             $('input', this).on('keyup change', function () {
@@ -79,5 +143,5 @@
                 }
             });
         });
-    });
+    }
 </script>

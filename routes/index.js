@@ -20,9 +20,13 @@ router.get('/', function (req, res, next) {
     for (let i=0;i<results.length; i++){
       results[i]['tracked'] = !!tracked_bills.includes(results[i].bill);
     }
+
+    var d = new Date();
+    d.setDate( d.getDate() - 2 );
     res.render('index', {
       title: 'Home',
-      my_bills: results.filter(x=>x['tracked']===true)
+      my_bills: results.filter(x=>x['tracked']===true),
+      new_bills: results.filter(x=>x['introduced']>d),
     });
   });
 });
