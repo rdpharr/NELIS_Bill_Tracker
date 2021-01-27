@@ -4,9 +4,9 @@
     <h4><a href="https://www.leg.state.nv.us{{this.url}}">{{this.bill}}</a> - {{this.summary}}</h4>
     <p><b>Sponsor: </b>{{this.primary_sponsor}} -
     {{#if this.tracked}}
-        <button id="btn_{{this.bill}}" type="button" onclick='document.cookie="{{this.bill}}=true;Max-Age=-99999999;";window.location.reload();'>Untrack</button>
+        <button id="btn_{{this.bill}}" class="btn btn-outline-danger btn-sm" type="button" onclick='document.cookie="{{this.bill}}=true;Max-Age=-99999999;";window.location.reload();'>Untrack</button>
     {{else}}
-        <button id="btn_{{this.bill}}" type="button" onclick='document.cookie="{{this.bill}}=true;expires=1 Jul 2021 12:00:00 GMT;";window.location.reload();'>Track</button>
+        <button id="btn_{{this.bill}}" class="btn btn-outline-primary btn-sm" type="button" onclick='document.cookie="{{this.bill}}=true;expires=1 Jul 2021 12:00:00 GMT;";window.location.reload();'>Track</button>
     {{/if}}
     </p>
     <table class="table table-striped table-bordered display responsive">

@@ -19,9 +19,9 @@
             <td>{{this.most_recent_action}}</td>
             <td>{{this.upcoming_hearings}}</td>
             {{#if this.tracked}}
-                <td><button id="btn_{{this.bill}}" type="button" onclick='document.cookie="{{this.bill}}=true;Max-Age=-99999999;";window.location.reload();'>Untrack</button></td>
+                <td><button id="btn_{{this.bill}}" class="btn btn-outline-danger btn-sm" type="button" onclick='document.cookie="{{this.bill}}=true;Max-Age=-99999999;";window.location.reload();'>Untrack</button></td>
             {{else}}
-                <td><button id="btn_{{this.bill}}" type="button" onclick='document.cookie="{{this.bill}}=true;expires=1 Jul 2021 12:00:00 GMT;";window.location.reload();'>Track</button></td>
+                <td><button id="btn_{{this.bill}}" class="btn btn-outline-primary btn-sm" type="button" onclick='document.cookie="{{this.bill}}=true;expires=1 Jul 2021 12:00:00 GMT;";window.location.reload();'>Track</button></td>
             {{/if}}
         </tr>
     {{/each}}
