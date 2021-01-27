@@ -20,7 +20,7 @@ router.get('/', function (req, res, next) {
         for (let i=0;i<results.length; i++){
             results[i]['tracked'] = !!tracked_bills.includes(results[i].bill);
         }
-        res.render('new_bills', {
+        res.render('bills', {
             title: 'Newest Bills',
             data: results
         });

@@ -1,22 +1,32 @@
 <h2>{{title}}</h2>
 {{#each data}}
-    <hr>
-    <h4><a href="https://www.leg.state.nv.us{{this.url}}">{{this.bill}}</a> - {{this.summary}}</h4>
-    <p><b>Sponsor: </b>{{this.primary_sponsor}} -
-    {{#if this.tracked}}
-        <button id="btn_{{this.bill}}" class="btn btn-outline-danger btn-sm" type="button" onclick='document.cookie="{{this.bill}}=true;Max-Age=-99999999;";window.location.reload();'>Untrack</button>
-    {{else}}
-        <button id="btn_{{this.bill}}" class="btn btn-outline-primary btn-sm" type="button" onclick='document.cookie="{{this.bill}}=true;expires=1 Jul 2021 12:00:00 GMT;";window.location.reload();'>Track</button>
-    {{/if}}
-    </p>
-    <table class="table table-striped table-bordered display responsive">
-        <tr>
-            <td><b>Title:</b></td>
-            <td>{{this.title}}</td>
-        </tr>
-        <tr>
-            <td><b>Digest:</b></td>
-            <td>{{this.digest}}</td>
-        </tr>
-    </table>
+    <div class="card border-primary">
+        <div class="card-block">
+            <div class="card-header">
+                <h4><a href="https://www.leg.state.nv.us{{this.url}}">{{this.bill}}</a> - {{this.summary}}</h4>
+            </div>
+            <div class="card-body text-dark">
+                <table class="table table-striped table-bordered display responsive">
+                    <tr>
+                        <td><b>Title:</b></td>
+                        <td>{{this.title}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Digest:</b></td>
+                        <td>{{this.digest}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="card-footer">
+                <p><b>Sponsor: </b>{{this.primary_sponsor}} -
+                    {{#if this.tracked}}
+                        <button id="btn_{{this.bill}}" class="btn btn-outline-danger btn-sm" type="button" onclick='document.cookie="{{this.bill}}=true;Max-Age=-99999999;";window.location.reload();'>Untrack this bill</button>
+                    {{else}}
+                        <button id="btn_{{this.bill}}" class="btn btn-outline-primary btn-sm" type="button" onclick='document.cookie="{{this.bill}}=true;expires=1 Jul 2021 12:00:00 GMT;";window.location.reload();'>Track this bill</button>
+                    {{/if}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <br/>
 {{/each}}
