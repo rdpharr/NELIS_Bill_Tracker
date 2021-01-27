@@ -5,8 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var newBillsRouter = require('./routes/new_bills');
-var billScraperRouter = require('./routes/bill_scraper');
+var billsRouter = require('./routes/bills');
+var scrapeRouter = require('./routes/scrape');
 var searchRouter = require('./routes/search');
 
 var app = express();
@@ -25,8 +25,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/new_bills', newBillsRouter);
-app.use('/scrape', billScraperRouter);
+app.use('/bills', billsRouter);
+app.use('/scrape', scrapeRouter);
 app.use('/search', searchRouter);
 
 

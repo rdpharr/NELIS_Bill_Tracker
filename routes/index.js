@@ -21,8 +21,8 @@ router.get('/', function (req, res, next) {
       results[i]['tracked'] = !!tracked_bills.includes(results[i].bill);
     }
     res.render('index', {
-      title: 'Home - All Bills',
-      data: results
+      title: 'Home',
+      my_bills: results.filter(x=>x['tracked']===true)
     });
   });
 });

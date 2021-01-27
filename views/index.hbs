@@ -1,4 +1,7 @@
 <h2>{{title}}</h2>
+<p>Welcome to the Mass Liberation Project's Nevada Bill Tracker. This page allows you to track bills in the Nevada Legislature with data that's updated every hour. Go to <a href="bills">all bills</a> to start tracking some bills. They will show up in the table below.</p>
+
+<h4>My Bills</h4>
 <table id="resultsTable" class="table table-striped table-bordered display responsive" style="width:100%">
     <thead>
     <tr>
@@ -11,7 +14,7 @@
     </tr>
     </thead>
     <tbody>
-    {{#each data}}
+    {{#each my_bills}}
         <tr>
             <td><a href="https://www.leg.state.nv.us{{this.url}}">{{this.bill}}</a></td>
             <td>{{this.summary}}</td>
