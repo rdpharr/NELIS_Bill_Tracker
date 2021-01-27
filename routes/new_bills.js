@@ -16,6 +16,10 @@ router.get('/', function (req, res, next) {
         if (error) {
             console.log({ error: error });
         }
+        let tracked_bills = Object.keys(req.cookies).filter(x=>x.substring(1,2) ==='B');
+        for (let i=0;i<results.length; i++){
+            results[i]['tracked'] = !!tracked_bills.includes(results[i].bill);
+        }
         res.render('new_bills', {
             title: 'Newest Bills',
             data: results

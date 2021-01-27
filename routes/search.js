@@ -38,6 +38,10 @@ router.post('/', function (req, res, next) {
         for (i=0; i<bill_nos.length; i++){
             bills.push(documents.find(x=>bill_nos[i]===x.bill))
         }
+        let tracked_bills = Object.keys(req.cookies).filter(x=>x.substring(1,2) ==='B');
+        for (let i=0;i<bills.length; i++){
+            bills[i]['tracked'] = !!tracked_bills.includes(bills[i].bill);
+        }
         res.render('search', {
             title: 'Search Results',
             data: bills

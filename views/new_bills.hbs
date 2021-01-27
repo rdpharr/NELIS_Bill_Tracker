@@ -7,6 +7,7 @@
         <th>Introduced</th>
         <th>Most Recent Action</th>
         <th>Hearings</th>
+        <th>Bill Tracking</th>
     </tr>
     </thead>
     <tbody>
@@ -17,6 +18,11 @@
             <td>{{dateFormat this.introduced "YYYY-MM-DD"}}</td>
             <td>{{this.most_recent_action}}</td>
             <td>{{this.upcoming_hearings}}</td>
+            {{#if this.tracked}}
+                <td><button id="btn_{{this.bill}}" type="button" onclick='document.cookie="{{this.bill}}=true;Max-Age=-99999999;";window.location.reload();'>Untrack</button></td>
+            {{else}}
+                <td><button id="btn_{{this.bill}}" type="button" onclick='document.cookie="{{this.bill}}=true;expires=1 Jul 2021 12:00:00 GMT;";window.location.reload();'>Track</button></td>
+            {{/if}}
         </tr>
     {{/each}}
     </tbody>
