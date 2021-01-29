@@ -6,6 +6,7 @@ const logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var billsRouter = require('./routes/bills');
+var singleBillRouter = require('./routes/get_bill');
 var scrapeRouter = require('./routes/scrape');
 var searchRouter = require('./routes/search');
 
@@ -26,9 +27,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/bills', billsRouter);
+app.use('/get_bill', singleBillRouter);
 app.use('/scrape', scrapeRouter);
 app.use('/search', searchRouter);
-
 
 
 // catch 404 and forward to error handler
