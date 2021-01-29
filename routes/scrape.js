@@ -35,7 +35,7 @@ function scrape_bills(req,res,next){
             manager.detach()
         })
         .catch((error) => {
-            console.error(error)
+            console.error(error.errorText)
         });
 }
 
