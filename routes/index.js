@@ -22,7 +22,7 @@ router.get('/', function (req, res, next) {
     }
 
     var d = new Date();
-    d.setDate( d.getDate() - 2 );
+    d.setDate( d.getDate() - 3 );
     res.render('index', {
       title: 'Home',
       my_bills: results.filter(x=>x['tracked']===true),
