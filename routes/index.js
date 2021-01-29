@@ -16,7 +16,7 @@ router.get('/', function (req, res, next) {
     if (error) {
       console.log({ error: error });
     }
-    let tracked_bills = Object.keys(req.cookies).filter(x=>x.substring(1,2) ==='B');
+    let tracked_bills = Object.keys(req.cookies).filter(x=>x.substring(0,1) !='_');
     for (let i=0;i<results.length; i++){
       results[i]['tracked'] = !!tracked_bills.includes(results[i].bill);
     }
