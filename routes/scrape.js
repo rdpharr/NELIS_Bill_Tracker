@@ -128,8 +128,8 @@ function parse_bill_pages(responses, bills){
             'bill_text':$('div:contains("Bill Text")').next('div').next('div').text().replace(/\s+/g, ' ').trim(),
             'bill_history':$('div:contains("Bill History")').parent().next('div.row').text().replace(/\s+/g, ' ').trim()
         };
+        d['digest'] = d['digest'].split('Close digest')[0];
         data.push(d);
-        //console.log(d);
     }
     return data;
 }
