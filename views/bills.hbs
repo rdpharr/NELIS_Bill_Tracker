@@ -1,48 +1,94 @@
-<h2>{{title}}</h2>
-<table id="resultsTable" class="table table-striped table-bordered display responsive" style="width:100%">
-    <thead>
-    <tr>
-        <th>Bill</th>
-        <th>Summary</th>
-        <th>Introduced</th>
-        <th>Most Recent Action</th>
-        <th>Hearings</th>
-        <th>Bill Tracking</th>
-    </tr>
-    </thead>
-    <tbody>
-    {{#each data}}
-        <tr>
-            <td><a href="https://www.leg.state.nv.us{{this.url}}">{{this.bill}}</a></td>
-            <td>{{this.summary}}</td>
-            <td>{{dateFormat this.introduced "YYYY-MM-DD"}}</td>
-            <td>{{this.most_recent_action}}</td>
-            <td>{{this.upcoming_hearings}}</td>
-            {{#if this.tracked}}
-                <td><input type="button" id="btn_{{this.bill}}" class="btn btn-outline-danger btn-sm" type="button" onclick="toggle_tracking('{{this.bill}}')" value="Untrack"></td>
-            {{else}}
-                <td><input type="button" id="btn_{{this.bill}}" class="btn btn-outline-primary btn-sm" type="button" onclick="toggle_tracking('{{this.bill}}')" value="Track"></td>
-            {{/if}}
-        </tr>
-    {{/each}}
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-md-6">
+        <h2>{{title}}</h2>
+        <div class="card border-primary col-md-12">
+            <div class="card-block">
+                <div class="card-header">
+                    <h4><a id="link" href=""></a> - <span id="summary"></span></h4>
+                </div>
+                <div class="card-body text-dark">
+                    <table class="table table-striped table-bordered display responsive">
+                        <tr>
+                            <td><b>Title:</b></td>
+                            <td id="title"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Digest:</b></td>
+                            <td id="digest"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <p><b>Sponsor: </b> <span id="sponsor"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="col-md-6">
+        <table id="resultsTable" class="table table-striped table-bordered display responsive" style="width:100%">
+            <thead>
+            <tr>
+                <th>Bill</th>
+                <th>Summary</th>
+                <th>Introduced</th>
+                <th>Bill Tracking</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each data}}
+                <tr>
+                    <td><a href="https://www.leg.state.nv.us{{this.url}}">{{this.bill}}</a></td>
+                    <td>{{this.summary}}</td>
+                    <td>{{dateFormat this.introduced "YYYY-MM-DD"}}</td>
+                    {{#if this.tracked}}
+                        <td><input type="button" id="btn_{{this.bill}}" class="btn btn-outline-danger btn-sm" type="button" onclick="toggle_tracking('{{this.bill}}')" value="Untrack"></td>
+                    {{else}}
+                        <td><input type="button" id="btn_{{this.bill}}" class="btn btn-outline-primary btn-sm" type="button" onclick="toggle_tracking('{{this.bill}}')" value="Track"></td>
+                    {{/if}}
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
 <script>
     $(document).ready(function () {
+        ready_table('#resultsTable');
+        $('#resultsTable tbody').on( 'click', 'tr', function () {
+            $('#resultsTable').DataTable().$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            get_bill(this.cells[0].textContent);
+        } );
+        get_bill("AB1");
+
+    });
+    function get_bill(bill){
+        $.get("/get_bill?bill="+bill, function(data){
+            let d = data[0];
+            $('#link').attr('href', "https://www.leg.state.nv.us" + d.url);
+            $('#link').text(d.bill);
+            $('#summary').text(d.summary);
+            $('#title').text(d.title);
+            $('#digest').text(d.digest);
+            $('#sponsor').text(d.primary_sponsor);
+        });
+    }
+    function ready_table(table_name){
         $.fn.dataTable.ext.errMode = 'none';
-        let table = $('#resultsTable').DataTable({
+        let table = $(table_name).DataTable({
             fixedHeader: true,
             autoWidth: true,
             dom: 'Bltip',
-            order:[2,"desc"],
             buttons: [
                 'csvHtml5',
                 'excelHtml5',
                 'pdfHtml5'
             ],
         });
-        $('#resultsTable thead tr').clone(true).appendTo('#resultsTable thead');
-        $('#resultsTable thead tr:eq(1) th').each(function (i) {
+        $(table_name +' thead tr').clone(true).appendTo(table_name +' thead');
+        $(table_name +' thead tr:eq(1) th').each(function (i) {
             var title = $(this).text();
             $(this).html('<input type="text" placeholder="Search ' + title + '" style="width:90%" />');
             $('input', this).on('keyup change', function () {
@@ -54,7 +100,7 @@
                 }
             });
         });
-    });
+    }
     function toggle_tracking(bill){
         let btn = $('#btn_' + bill);
         console.log(btn.val());
