@@ -5,18 +5,32 @@
                 <h4>{{title}}</h4>
             </div>
             <div class="card-body text-dark">
-                <p class="card-text">Welcome to the Mass Liberation Project's Nevada Bill Tracker. Here you can track the bills you care about about. We pull data every hour from the NELIS database.</p>
+                <p class="lead card-text">Welcome to the Mass Liberation Project's Nevada Bill Tracker. Track the bills you care about about here. We pull data every hour from the NELIS database.</p>
                 <hr>
-                <p>Search for bills that you might want to track. Use the search box in the upper right corner. Try searching for <b>"criminal"</b>, <b>"juvenile"</b>, <b>"penalty"</b> or <b>"firearm"</b>. You can also search by BDR number. </p>
                 <form method="post" class="form-inline mt-4 mt-md-0" action="/search">
-                    <input class="form-control mr-md-4" type="text" name="SearchValue"
-                           placeholder="Search for Bill"
-                           aria-label="Search">
-                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p>Search for bills that you might want to track. Use the search box in the upper right corner. Try searching for <b>"criminal"</b>, <b>"juvenile"</b>, <b>"penalty"</b> or <b>"firearm"</b>. You can also search by BDR number. </p>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control mr-md-4" type="text" name="SearchValue"
+                                   placeholder="Search for Bill"
+                                   aria-label="Search">
+                        </div>
+                            <div class="col-md-1">
+                            <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+                        </div>
+                    </div>
                 </form>
                 <hr>
-                <p>See the bills you track on the home page, with data about their next hearing date. Go to <a href="bills">all bills</a> to start tracking some bills. They will show up in the table below.</p>
-                <a href="/bills" class="btn btn-primary">View All Bills</a>
+                <div class="row">
+                    <div class="col-md-8">
+                        <p>See the bills you track on the home page, with data about their next hearing date. Go to <a href="bills">all bills</a> to start tracking some bills. They will show up in the table below.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/bills" class="btn btn-primary">View All Bills</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
