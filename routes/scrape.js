@@ -130,6 +130,7 @@ function parse_bill_pages(responses, bills){
         };
         d['digest'] = d['digest'].split('Close digest')[0];
         d['title'] = d['title'].split('Close title')[0];
+        d['primary_sponsor'] = d['primary_sponsor'].replace('View 1 Primary Sponsors Close Primary Sponsors','');
         data.push(d);
     }
     return data;

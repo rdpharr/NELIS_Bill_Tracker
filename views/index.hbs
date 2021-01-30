@@ -65,7 +65,7 @@
                         <th>Bill</th>
                         <th>Summary</th>
                         <th>Introduced</th>
-                        <th>Most Recent Action</th>
+                        <th>Sponsor</th>
                         <th>Hearings</th>
                         <th>Bill Tracking</th>
                     </tr>
@@ -76,7 +76,7 @@
                             <td><a href="https://www.leg.state.nv.us{{this.url}}">{{this.bill}}</a></td>
                             <td>{{this.summary}}</td>
                             <td>{{dateFormat this.introduced "YYYY-MM-DD"}}</td>
-                            <td>{{this.most_recent_action}}</td>
+                            <td>{{this.primary_sponsor}}</td>
                             <td>{{this.upcoming_hearings}}</td>
                             {{#if this.tracked}}
                                 <td><input type="button" id="btn_{{this.bill}}" class="btn btn-outline-danger btn-sm" type="button" onclick="toggle_tracking('{{this.bill}}')" value="Untrack"></td>
@@ -106,7 +106,7 @@
                         <th>Bill</th>
                         <th>Summary</th>
                         <th>Introduced</th>
-                        <th>Most Recent Action</th>
+                        <th>Sponsor</th>
                         <th>Hearings</th>
                         <th>Bill Tracking</th>
                     </tr>
@@ -117,7 +117,7 @@
                             <td><a href="https://www.leg.state.nv.us{{this.url}}">{{this.bill}}</a></td>
                             <td>{{this.summary}}</td>
                             <td>{{dateFormat this.introduced "YYYY-MM-DD"}}</td>
-                            <td>{{this.most_recent_action}}</td>
+                            <td>{{this.primary_sponsor}}</td>
                             <td>{{this.upcoming_hearings}}</td>
                             {{#if this.tracked}}
                                 <td><input type="button" id="btn_{{this.bill}}" class="btn btn-outline-danger btn-sm" type="button" onclick="toggle_tracking('{{this.bill}}')" value="Untrack"></td>
