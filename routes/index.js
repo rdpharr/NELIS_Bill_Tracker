@@ -24,7 +24,7 @@ router.get('/', function (req, res, next) {
     var d = new Date();
     d.setDate( d.getDate() - 3 );
     res.render('index', {
-      title: 'Home',
+      title: 'NV Bill Tracker',
       my_bills: results.filter(x=>x['tracked']===true),
       new_bills: results.filter(x=>x['introduced']>d),
     });
