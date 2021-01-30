@@ -129,6 +129,7 @@ function parse_bill_pages(responses, bills){
             'bill_history':$('div:contains("Bill History")').parent().next('div.row').text().replace(/\s+/g, ' ').trim()
         };
         d['digest'] = d['digest'].split('Close digest')[0];
+        d['title'] = d['title'].split('Close title')[0];
         data.push(d);
     }
     return data;
