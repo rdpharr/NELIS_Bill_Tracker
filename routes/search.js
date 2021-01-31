@@ -42,8 +42,8 @@ router.post('/', function (req, res, next) {
         for (let i=0;i<bills.length; i++){
             bills[i]['tracked'] = !!tracked_bills.includes(bills[i].bill);
         }
-        res.render('search', {
-            title: 'Search Results',
+        res.render('bills', {
+            title: `Search Results - "${term}"`,
             data: bills
         });
     });
