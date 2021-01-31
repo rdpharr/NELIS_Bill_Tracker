@@ -84,7 +84,7 @@ function db_push(data){
         ];
         con.query(sql,bill,(error, results) => {
             if (error) {
-                console.log(d);
+                //console.log(d);
                 console.log({ error: error });
             }
             //console.log(results);
